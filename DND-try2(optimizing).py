@@ -518,6 +518,8 @@ while mapNr == 2:
                 elif answer == 2:
                     D20uit = D20()
                     print("You roll a " + str(D20uit) + ", You fail to flee as the Rabbits block your path")
+                D20uit = D20()
+                print("The Rabbits attack. You roll a " + str(D20uit) + ", you dodge the attack.")
                 nrForWhile += 1
             os.system('cls')
             if frogsAmount == 0:
