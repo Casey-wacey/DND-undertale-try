@@ -25,12 +25,34 @@ mapNr = 1
 wait = "yes"
 randomAnwser = ''
 moveDirection = ''
+nrForWhile = 0
+def D20():
+    D20 = round(random.randint(1,20))
+    return D20
+def D100():
+    D100 = round(random.randint(1,100))
+    return D100
+def D10():
+    D10 = round(random.randint(1,10))
+    return D10
+D20uit = 0
+D100uit = 0
+D10uit = 0
+
 
 name = input("What's your name? ")
 character = input("enter a single character. Choose wisely, as this will be how you look for the rest of the game: ")
-print("For now there are 3 rooms you can explore, so go talk to the npc's.")
-
-
+answer = input("Do you want to hear how the game works? (Y/N) ")
+if answer == "Y" or answer == "y":
+    print("You will always start in the top left of a room, each round you can move 1 space with R, L, U, and D.\nA '.' is a regular floor, '#' a wall, and letters like 'C' a character or activity. X is the exit of the room\n")
+    print("in dialog you have a maximum of 4 options, to react friendly, aggressive, stay silent or to flirt. You will get differt dialog depending on your answer, and the characters remember if you were nice or mean to them.\n")
+    print("And lastly combat, you have the choice of either fighting or (trying to) flee. for both first a D20 is rolled to decide if you hit/succeed, and if you choose to fight a D10 is rolled to decide damage.\n")
+    print("Heres where your stats come in. if your damage is 10 and you roll a 5, you deal 15 damage. speed helps dodging attacks and fleeing, and charm allows helps you convice people in dialoge.\n")
+    print("Good luck\n-C\n")
+    wait = input()
+elif answer == "N" or answer == "n":
+    print()
+print("Your friend said he was going to explore a cave close to your town, but hasn't returned since.\nYou head out in search of him with your sword...")
 #map 1
 while mapNr == 1:
     map = [
@@ -376,7 +398,7 @@ while mapNr == 1:
         quit()
 
 # map 2
-if map == 2:
+if mapNr == 2:
     map = [
         ["#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#"],
         ["#", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "#"],
@@ -436,13 +458,17 @@ while mapNr == 2:
 
                 elif answer == 2:
                     print("You asked for it.\nRabbit starts mitosis, copying himself until a ring of frogs surrounds you ")
-                
+                    combat = True
+                    frogsAmount = 20
+
                 elif answer == 3:
                     print("Ill take that as a no, well thanks anyways. ")
 
             elif answer == 2:
                 print("You asked for it.\nRabbit starts mitosis, copying himself until a ring of frogs surrounds you ")
-                
+                combat = True
+                frogsAmount = 20
+
             elif answer == 3:
                 print("So, have you seen them? ")
                 answer = int(input("1 for friendly anwser, 2 for aggresive, and 3 to stay silent "))
@@ -451,7 +477,9 @@ while mapNr == 2:
 
                 elif answer == 2:
                     print("You asked for it.\nRabbit starts mitosis, copying himself until a ring of frogs surrounds you ")
-                
+                    combat = True
+                    frogsAmount = 20
+
                 elif answer == 3:
                     print("Ill take that as a no, thanks anyways. ")
 
@@ -471,6 +499,31 @@ while mapNr == 2:
                         print("Rabbit smiles, but again, you cant really tell as theyre a frog\n I... ill see you in room 4\nRabbit and you are now dating! ")
                         character2Relation += 20
                         character2RelationStatus = "date"
+        if combat:
+            print("You have entered combat with the Rabbits!")
+        while combat:
+            nrForWhile = 0
+            while nrForWhile < frogsAmount:
+                print("You are fighting: ")
+                while nrForWhile < frogsAmount:
+                    print("Rabbit")
+                    nrForWhile += 1
+                answer = int(input("1 to attack, 2 to flee "))
+                if answer == 1:
+                    D20uit = D20()
+                    print("You roll a " + str(D20uit) + ", hit!")
+                    D10uit = D10()
+                    print("You roll a " + str(D10uit) + ", you kill a Rabbit. ")
+                    frogsAmount -= 1
+                elif answer == 2:
+                    D20uit = D20()
+                    print("You roll a " + str(D20uit) + ", You fail to flee as the Rabbits block your path")
+                nrForWhile += 1
+            os.system('cls')
+            if frogsAmount == 0:
+                combat = False
+                
+
         wait = input()
 
     #random events
