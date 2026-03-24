@@ -521,6 +521,7 @@ while mapNr == 2:
                 D20uit = D20()
                 print("The Rabbits attack. You roll a " + str(D20uit) + ", you dodge the attack.")
                 nrForWhile += 1
+            wait = input()
             os.system('cls')
             if frogsAmount == 0:
                 combat = False
