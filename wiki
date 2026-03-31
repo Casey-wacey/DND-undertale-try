@@ -1,6 +1,1 @@
-Heres the (for now very limited) list of icons used in the map:
--"#", walls, if ran into will instakill player.
--".", a floor, can be freely walked on.
--"X", exit of a room.
--letters, characters or activities.
--"Ø", pits, will teleport player to a random room (cant be later than current room ofc)
+
